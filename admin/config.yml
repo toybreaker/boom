@@ -6,7 +6,7 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "images"
+media_folder: "assets/i"
 
 display_url: https://boom.junglestar.org
 
@@ -38,6 +38,8 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Permalink", name: "permalink", widget: "hidden", default: "//"}
       - {label: "Body", name: "body", widget: "markdown", required: false}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+
 
   - name: "layouts"
     label: "Layouts"
