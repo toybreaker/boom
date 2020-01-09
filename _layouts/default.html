@@ -2,43 +2,75 @@
 
 ---
 <!DOCTYPE html>
-<html lang="{% if page.lang %}{{page.lang}}{% else %}{{site.lang}}{% endif %}" prefix="og: http://ogp.me/ns#">
-
-  {% include head.html %}
-
+<html lang="{% if page.lang %}{{page.lang}}{% else %}{{site.lang}}{% endif %}"
+  prefix="og: http://ogp.me/ns#"> {% include head.html %}
   <!--layouts/default-->
-  <body class="{{page.title | slugify}} {% if site.menu %}{{ site.menu }}{% endif %}">
 
-    {% include svg/defs.html %}
-
-    {% include header.html %}
+  <body class="{{page.title | slugify}} {% if site.menu %}{{ site.menu }}{% endif %}"> {% include svg/defs.html %} {% include header.html %}
 
     <div class="bungkus group">
 
-      <div class="container main_content" role="main">
+      <div class="container main_content"
+        role="main">
 
-        <div class="post_text">
-          {{content}}
+        <div class="post_text">Posts
+
+        </div>
+
+        <div class="post_grid"> {% for post in site.posts %}
+          <!--includes/post_card-->
+
+          <a class="card {{ post.category }} {% if post.sticky %}sticky_post{% endif %}"
+            title="{{ post.name }}"
+            href="{{ site.baseurl }}{{ post.url | slugify }}/">
+
+            <div class="card_post_image clipped">
+
+              <figure class="clipped">
+                <img loading="lazy"
+                  src="{{ post.image }}"
+                  alt="{{ page.title }}"> {% if post.flag %}
+
+                <figcaption class="figcaption {{ post.flag | slugify }}">
+
+                  {{ post.flag }}
+
+                </figcaption> {% endif %}
+
+              </figure>
+
+            </div>
+
+            <div class="card_post_text">
+
+              <h1 class="{% if post.ad %}ad_symbol{% endif %}">{{post.name}}
+
+              </h1>
+
+              <div class="card_post_text_content">
+                {{post.content | strip_html | truncatewords: 22 }}
+
+              </div>
+
+              <div class="button_row">
+
+                <span class="button">Learn more
+
+                </span>
+
+              </div>
+              <!-- <div class="read_time_block">
+              <span class="read_time">{% include read_time.html %}e</span>
+            </div> -->
+
+            </div>
+
+          </a> {% endfor %}
+
         </div>
 
       </div>
 
-      <div class="post_grid">
-
-        {% for post in posts %}
-         {% include post_card.html %}
-        {% endfor %}
-
-      </div>
-
-    </div>
-
-    {% include footer.html %}
-
-    {% include script_ext_link.html %}
-
-    {% include script_append_to_copy_action.html %}
-
-  </body>
+    </div> {% include footer.html %} {% include script_ext_link.html %} {% include script_append_to_copy_action.html %} </body>
 
 </html>
